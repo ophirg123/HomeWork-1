@@ -28,11 +28,16 @@ if args.task in TaskList and args.N in range(1, 1001):
                 break
         print(prime_List[args.N])
     else:
-        f0 = 0
-        f1 = 1
-        while args.N > 0:
-            a = a
-        print('fibonacci')
+        n0 = 0
+        n1 = 1
+        count = 1
+        while count < args.N:
+            nth = n0 + n1
+            # update values
+            n0 = n1
+            n1 = nth
+            count += 1
+        print(nth)
 else:
     print('Wrong input')
     exit()
