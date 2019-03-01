@@ -1,6 +1,6 @@
 import argparse
-#import time
-#start = time.time()
+import time
+start = time.time()
 
 parser = argparse.ArgumentParser(description='Pi number for N digits, Nth prime number, Nth Fibonacci number')
 # Parse Command-line argument, take arguments from the CMD and parse to the .py variables.
@@ -31,15 +31,22 @@ if args.task in TaskList and args.N in range(1, 1001):
         n0 = 0
         n1 = 1
         count = 1
-        while count < args.N:
-            nth = n0 + n1
-            # update values
-            n0 = n1
-            n1 = nth
-            count += 1
-        print(nth)
+        if args.N == 1:
+            print(1)
+        else:
+            while count < args.N:
+                nth = n0 + n1
+                # update values as the fibonacci equation
+                n0 = n1
+                n1 = nth
+                count += 1
+            fibonacci_number = str(nth)
+            length_fibonacci_number = len(fibonacci_number)
+            for Slice in range(0, length_fibonacci_number, 40):
+                #  Slice the the output number to 40 digits each line
+                print(fibonacci_number[Slice:Slice+40])
 else:
     print('Wrong input')
     exit()
-#end = time.time()
-#print(end - start)
+end = time.time()
+print(end - start)
