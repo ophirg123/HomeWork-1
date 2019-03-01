@@ -1,6 +1,6 @@
 import argparse
-#import time
-#start = time.time()
+import time
+start = time.time()
 
 parser = argparse.ArgumentParser(description='Pi number for N digits, Nth prime number, Nth Fibonacci number')
 # Parse Command-line argument, take arguments from the CMD and parse to the .py variables.
@@ -12,6 +12,7 @@ TaskList = ['pi', 'prime', 'fibonacci']  # List of optional tasks
 
 try:
     value = int(args.N)
+    # Int input validation
 except ValueError:
     print('Wrong input')
     exit()
@@ -19,7 +20,23 @@ except ValueError:
 Requested_number = int(float(args.N))
 if args.task in TaskList and Requested_number in range(1, 1001):
     if args.task == 'pi':
-        print('pi')
+        def make_pi():
+            q, r, t, k, m, x = 1, 0, 1, 1, 3, 3
+            for j in range(5000):
+                if 4 * q + r - t < m * t:
+                    yield m
+                    q, r, t, k, m, x = 10 * q, 10 * (r - m * t), t, k, (10 * (3 * q + r)) // t - 10 * m, x
+                else:
+                    q, r, t, k, m, x = q * k, (2 * q + r) * x, t * x, k + 1, (q * (7 * k + 2) + r * x) // (t * x), x + 2
+
+
+        my_array = []
+        for i in make_pi():
+            my_array.append(str(i))
+
+        my_array = my_array[:1] + ['.'] + my_array[1:]
+        big_string = "".join(my_array)
+        print(big_string[0:Requested_number+2])
     elif args.task == 'prime':
         List_length = 0
         prime_List = [1]
@@ -32,7 +49,7 @@ if args.task in TaskList and Requested_number in range(1, 1001):
                     # for example, if 2 is the prime number, every 2*X in the range of the optional list will be 0.
                     optional_List[every_multiple_of_the_prime] = 0
             List_length = len(prime_List)
-            if List_length == 1001:  # Make sure that all input numbers will be receive output from the prime list.
+            if List_length == 1001:  # Make sure that all input numbers will receive output from the prime list.
                 break
         print(prime_List[Requested_number])
     else:
@@ -48,6 +65,7 @@ if args.task in TaskList and Requested_number in range(1, 1001):
                 n0 = n1
                 n1 = nth
                 count += 1
+
             fibonacci_number = str(nth)
             length_fibonacci_number = len(fibonacci_number)
             for Slice in range(0, length_fibonacci_number, 40):
@@ -56,5 +74,5 @@ if args.task in TaskList and Requested_number in range(1, 1001):
 else:
     print('Wrong input')
     exit()
-#end = time.time()
-#print(end - start)
+end = time.time()
+print(end - start)
