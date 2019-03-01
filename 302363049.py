@@ -1,15 +1,23 @@
 import argparse
-import time
-start = time.time()
+#import time
+#start = time.time()
 
 parser = argparse.ArgumentParser(description='Pi number for N digits, Nth prime number, Nth Fibonacci number')
 # Parse Command-line argument, take arguments from the CMD and parse to the .py variables.
-parser.add_argument('--task', type=str, required=True, help='Type pi / prime / Fibonacci')
-parser.add_argument('--N', type=int, required=True, help='Integer Number Between 1 and 1000')
+parser.add_argument('--task', type=str, required=True, default='', help='Type pi / prime / Fibonacci')
+parser.add_argument('--N', type=str, required=True, default='', help='Integer Number Between 1 and 1000')
 args = parser.parse_args()
 
 TaskList = ['pi', 'prime', 'fibonacci']  # List of optional tasks
-if args.task in TaskList and args.N in range(1, 1001):
+
+try:
+    value = int(args.N)
+except ValueError:
+    print('Wrong input')
+    exit()
+
+Requested_number = int(float(args.N))
+if args.task in TaskList and Requested_number in range(1, 1001):
     if args.task == 'pi':
         print('pi')
     elif args.task == 'prime':
@@ -26,15 +34,15 @@ if args.task in TaskList and args.N in range(1, 1001):
             List_length = len(prime_List)
             if List_length == 1001:  # Make sure that all input numbers will be receive output from the prime list.
                 break
-        print(prime_List[args.N])
+        print(prime_List[Requested_number])
     else:
         n0 = 0
         n1 = 1
         count = 1
-        if args.N == 1:
+        if Requested_number == 1:
             print(1)
         else:
-            while count < args.N:
+            while count < Requested_number:
                 nth = n0 + n1
                 # update values as the fibonacci equation
                 n0 = n1
@@ -48,5 +56,5 @@ if args.task in TaskList and args.N in range(1, 1001):
 else:
     print('Wrong input')
     exit()
-end = time.time()
-print(end - start)
+#end = time.time()
+#print(end - start)
