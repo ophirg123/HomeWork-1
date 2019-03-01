@@ -1,6 +1,6 @@
 import argparse
-#import time
-#start = time.time()
+# import time
+# start = time.time()
 
 parser = argparse.ArgumentParser(description='Pi number for N digits, Nth prime number, Nth Fibonacci number')
 # Parse Command-line argument, take arguments from the CMD and parse to the .py variables.
@@ -80,5 +80,5 @@ if args.task in TaskList and Requested_number in range(1, 1001):
 else:
     print('Wrong input')
     exit()
-#end = time.time()
-#print(end - start)
+# end = time.time()
+# print(end - start)
